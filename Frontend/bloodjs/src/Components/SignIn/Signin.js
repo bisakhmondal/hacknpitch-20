@@ -1,4 +1,41 @@
 import React from 'react';
+import './Signin.css'
+import Particles from 'react-particles-js';
+
+const particleoptions={
+  "particles": {
+      "number": {
+          "value": 160,
+          "density": {
+              "enable": false
+          }
+      },
+      "size": {
+          "value": 10,
+          "random": true
+      },
+      "move": {
+          "direction": "bottom",
+          "out_mode": "out"
+      },
+      "line_linked": {
+          "enable": false
+      }
+  },
+  "interactivity": {
+      "events": {
+          "onclick": {
+              "enable": true,
+              "mode": "remove"
+          }
+      },
+      "modes": {
+          "remove": {
+              "particles_nb": 10
+          }
+      }
+  }
+}
 
 class SignIn extends React.Component{
   constructor(props){
@@ -41,6 +78,9 @@ class SignIn extends React.Component{
   render(){
     const {onRouteChange}=this.props;
     return(
+      <div>
+        <Particles className='particles'
+          params={particleoptions} />
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
         <main className="pa4 black-80">
           <div className="measure">
@@ -49,7 +89,7 @@ class SignIn extends React.Component{
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                 <input
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="pa2 input-reset ba bg-transparent  hover-white w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -59,12 +99,44 @@ class SignIn extends React.Component{
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="b pa2 input-reset ba bg-transparent  hover-white w-100"
                   type="password"
                   name="password"
                   id="password"
                   onChange={this.onPasswordChange}
                 />
+              </div>
+              <div className="mv3">
+                <label className="db fw6 lh-copy f6" htmlFor="password">You are: </label>
+                <input
+                // className='center b pa2 radio'
+                  // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white"
+                  type="radio"
+                  name="type"
+    
+                /> <label className='radio'>Donor</label><br />
+                <input
+                style={{justifyContents:"left"}}
+                // className='center b pa2'
+                  // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white "
+                  type="radio"
+                  name="type"
+                  
+                /><label className='radio'>Receiver</label><br />
+                <input
+                // className='center b pa2'
+                  // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white "
+                  type="radio"
+                  name="type"
+                  
+                /><label className='radio'>Driver</label><br/>
+                <input
+                // className=" b pa2"
+                  // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white "
+                  type="radio"
+                  name="type"
+                
+                /><label className='radio'>Company</label><br />
               </div>
             </fieldset>
             <div className="">
@@ -81,6 +153,7 @@ class SignIn extends React.Component{
           </div>
         </main>
       </article>
+      </div>
     
     );
   }
