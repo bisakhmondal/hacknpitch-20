@@ -1,39 +1,45 @@
 import React from 'react';
-import Navigation from './Components/Navigation/Navigation';
-import SignIn from './Components/SignIn/Signin';
-import Register from './Components/Register/Register.js';
 
+import {Router,BrowserRouter, withRouter} from 'react-router-dom';
+import MainRouter from './MainRouter'
 import './App.css';
 import 'tachyons';
-class App extends React.Component {
-  constructor(){
-    super();
-    this.state={
-      isSigned:false,
-      route:'',
-      identity:''
+const App =() =>(
+  // constructor(){
+  //   super();
+  //   this.state={
+  //     isSigned:false,
+  //     route:'',
+  //     identity:''
 
-    }
-  }
-  onClickChangeRoute=(route)=>{
-    if(route==='home'){
-      this.setState({route:route,isSigned:false});
-    }
-    else if(route==='signin'){
-      this.setState({route:route,isSigned:true});
-    }
-  }
-  render(){
-  return (
-    <div className="App">
-    <Navigation isSigned={this.state.isSigned} onClickChangeRoute={this.onClickChangeRoute} />
-    {/* <SignIn />
-     */}
-     <Register />
-    </div>
+  //   }
+  // }
+  <BrowserRouter>
+    <MainRouter />
+   </BrowserRouter>
+
+
+  // onClickChangeRoute=(route)=>{
+  //   if(route==='home'){
+  //     this.setState({route:route,isSigned:false});
+  //   }
+  //   else if(route==='signin'){
+  //     this.setState({route:route,isSigned:true});
+  //   }
+  // }
+  // render(){
+  // return (
+  //   <div className="App">
+  //   <Navigation isSigned={this.state.isSigned} onClickChangeRoute={this.onClickChangeRoute} />
+  //   {/* <SignIn />
+  //    */}
+  //    {/* <Register />
+  //     */}
+  //     <Donor />
+  //   </div>
     
-  )
-  }
-}
+  // )
+  // }
+)
 
 export default App;

@@ -1,7 +1,8 @@
 import React from 'react';
 import './Signin.css'
 import Particles from 'react-particles-js';
-import logo from './blood-drop-red-512.png'
+import {Link} from 'react-router-dom';
+
 const particleoptions={
   "particles": {
       "number": {
@@ -43,7 +44,8 @@ class SignIn extends React.Component{
     this.state={
       userEmail:'',
       userPassword:'',
-      userType:''
+      userType:'',
+      token:''
     }
   }
   onEmailChange=(event)=>{
@@ -56,29 +58,29 @@ class SignIn extends React.Component{
     this.setState({userType:event.target.value})
   }
 
-  authenticate=()=>{
-    fetch("http://localhost:3001/signin",{
-      method:'post',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        email:this.state.userEmail,
-        password:this.state.userPassword
-      })
-    })
-    .then(response=>response.json())
-    .then(data=>{
-      if(data==='success'){
-        this.props.onRouteChange('home');
-      }
-        else{
-          alert("Invalid Credential");
-          this.setState({userEmail:'',userPassword:''})
-        }
-    })
+  // authenticate=()=>{
+  //   fetch("http://localhost:3001/signin",{
+  //     method:'post',
+  //     headers:{'Content-Type':'application/json'},
+  //     body:JSON.stringify({
+  //       email:this.state.userEmail,
+  //       password:this.state.userPassword
+  //     })
+  //   })
+  //   .then(response=>response.json())
+  //   .then(data=>{
+  //     if(data==='success'){
+  //       this.props.onRouteChange('home');
+  //     }
+  //       else{
+  //         alert("Invalid Credential");
+  //         this.setState({userEmail:'',userPassword:''})
+  //       }
+  //   })
     
-    // console.log(this.state)
+  //   // console.log(this.state)
 
-  }
+  // }
   render(){
     console.log(this.state);
     
@@ -87,17 +89,17 @@ class SignIn extends React.Component{
       <div className='sign'>
         <Particles className='particles'
           params={particleoptions} />
-         <img className=" logo" src={logo} height="450" width='400'  alt=''/> 
-        <article className="articles br3 ba b--white-10 mv4 w-100 w-50-m w-35-l mw6 shadow-10 center">
+         {/* <img className=" logo" src={logo} height="450" width='400'  alt=''/>  */}
+        <article className="articles br3 ba b--white-10 mv4 w-100 w-50-m w-25-l mw6 shadow-10 center">
         
-        <main className="pa4 white">
+        <main className="pa4 black">
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f1 fw6 ph0 mh0">Sign In</legend>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                 <input
-                  className="pa2 input-reset ba bg-transparent white hover-black w-100"
+                  className="pa2 input-reset ba bg-transparent black hover-blue w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -107,7 +109,7 @@ class SignIn extends React.Component{
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent white hover-black w-100"
+                  className="b pa2 input-reset ba bg-transparent black hover-blue w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -115,7 +117,7 @@ class SignIn extends React.Component{
                 />
               </div>
               <div className="mv3">
-                <label className="db  f3 pa3 fw6 lh-copy f6 white b" htmlFor="password">Please Select your Designation </label>
+                <label className="db  f3 pa3 fw6 lh-copy f6 black b" htmlFor="password">Please Select your Designation </label>
                 <input
                 // className='center b pa2 radio'
                   // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white"
@@ -153,15 +155,22 @@ class SignIn extends React.Component{
               </div>
             </fieldset>
             <div className="">
-              <input
+              {/* <input
                 onClick={this.authenticate}
-                className="b ph3 pv2 input-reset ba b--white white bg-transparent grow pointer f6 dib"
+                className="b ph3 pv2 input-reset ba black btn btn-primary grow pointer f6 dib"
                 type="submit"
-                value="Sign in"black
-              />
+                value="Sign in"
+              /> */}
+              <Link
+                
+                className="b ph3 pv2 input-reset ba black btn btn-primary grow pointer f6 dib"
+                // type="submit"
+                value="Sign in"
+                to='/register/donor'
+              >Sign In</Link>
             </div>
             <div className="lh-copy mt3">
-              <p  onClick={()=>onRouteChange('register')} className="f6 link dim white db pointer">Register</p>
+              <p  onClick={()=>onRouteChange('register')} className="f6 link dim black center db pointer">Register</p>
             </div>
           </div>
         </main>

@@ -46,44 +46,44 @@ class Register extends React.Component{
     this.setState({userPassword2:event.target.value})
   }
 
-  authenticate=()=>{
-    fetch("http://localhost:3001/register",{
-      method:'post',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        email:this.state.userEmail,
-        password:this.state.userPassword,
-        name:this.state.name
-      })
-    })
-    .then(response=>response.json())
-    .then(user=>{
-      if(user){
-        this.props.loadProfile(user);
-        this.props.onRouteChange('home');
-      }
-    })
+  // authenticate=()=>{
+  //   fetch("http://localhost:3001/register",{
+  //     method:'post',
+  //     headers:{'Content-Type':'application/json'},
+  //     body:JSON.stringify({
+  //       email:this.state.userEmail,
+  //       password:this.state.userPassword,
+  //       name:this.state.name
+  //     })
+  //   })
+  //   .then(response=>response.json())
+  //   .then(user=>{
+  //     if(user){
+  //       this.props.loadProfile(user);
+  //       this.props.onRouteChange('home');
+  //     }
+  //   })
     
-    // console.log(this.state)
+  //   // console.log(this.state)
 
-  }
+  // }
   render(){
     const {onRouteChange}=this.props;
     return(
-      <div className='sign'>
+      <div className='sign center'>
         <Particles className='particles'
           params={particleoptions} />
          {/* <img className=" logo" src={logo} height="450" width='400'  alt=''/>  */}
         <article className="articles br3 ba b--white-10 mv4 w-100 w-50-m w-30-l mw6 shadow-10 center">
         <div className="reg">
-        <main className="pa4 white">
+        <main className="pa4 black">
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f1 fw6 ph0 mh0">Register</legend>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Name</label>
                 <input
-                  className="pa2 input-reset ba bg-transparent white hover-black w-100"
+                  className="pa2 input-reset ba bg-transparent black hover-blue w-100"
                   type="text"
                   name="name"
                   id="name"
@@ -93,7 +93,7 @@ class Register extends React.Component{
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                 <input
-                  className="pa2 input-reset ba bg-transparent white hover-black w-100"
+                  className="pa2 input-reset ba bg-transparent black hover-blue w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -103,7 +103,7 @@ class Register extends React.Component{
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent white hover-black w-100"
+                  className="b pa2 input-reset ba bg-transparent black hover-blue w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -114,7 +114,7 @@ class Register extends React.Component{
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Confirm Password</label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent white hover-black w-100"
+                  className="b pa2 input-reset ba bg-transparent black hover-blue w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -122,7 +122,7 @@ class Register extends React.Component{
                 />
               </div>
               <div className="mv3">
-                <label className="db  f3 pa3 fw6 lh-copy f6 white b" htmlFor="password">Please Select your Designation </label>
+                <label className="db  f3 pa3 fw6 lh-copy f6 black b" htmlFor="password">Please Select your Designation </label>
                 <input
                 // className='center b pa2 radio'
                   // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white"
@@ -154,13 +154,13 @@ class Register extends React.Component{
             <div className="">
               <input
                 onClick={this.authenticate}
-                className="b ph3 pv2 input-reset ba b--white white bg-transparent grow pointer f6 dib"
+                className="b ph3 pv2 input-reset ba btn btn-primary grow pointer f6 dib"
                 type="submit"
                 value="Register"
               />
             </div>
             <div className="lh-copy mt3">
-              <p  onClick={()=>onRouteChange('register')} className="f6 link dim white db pointer">Sign In</p>
+              <p  onClick={()=>onRouteChange('register')} className="f6 link dim black center db pointer">Sign In</p>
             </div>
           </div>
         </main>
