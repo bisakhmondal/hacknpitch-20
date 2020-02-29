@@ -1,7 +1,7 @@
 import React from 'react';
 import './Signin.css'
 import Particles from 'react-particles-js';
-
+import logo from './blood-drop-red-512.png'
 const particleoptions={
   "particles": {
       "number": {
@@ -42,7 +42,8 @@ class SignIn extends React.Component{
     super(props);
     this.state={
       userEmail:'',
-      userPassword:''
+      userPassword:'',
+      userType:''
     }
   }
   onEmailChange=(event)=>{
@@ -50,6 +51,9 @@ class SignIn extends React.Component{
   }
   onPasswordChange=(event)=>{
     this.setState({userPassword:event.target.value})
+  }
+  onRadio=(event)=>{
+    this.setState({userType:event.target.value})
   }
 
   authenticate=()=>{
@@ -76,20 +80,24 @@ class SignIn extends React.Component{
 
   }
   render(){
+    console.log(this.state);
+    
     const {onRouteChange}=this.props;
     return(
-      <div>
+      <div className='sign'>
         <Particles className='particles'
           params={particleoptions} />
-        <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
-        <main className="pa4 black-80">
+         <img className=" logo" src={logo} height="450" width='400'  alt=''/> 
+        <article className="articles br3 ba b--white-10 mv4 w-100 w-50-m w-35-l mw6 shadow-10 center">
+        
+        <main className="pa4 white">
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f1 fw6 ph0 mh0">Sign In</legend>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                 <input
-                  className="pa2 input-reset ba bg-transparent  hover-white w-100"
+                  className="pa2 input-reset ba bg-transparent white hover-black w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -99,7 +107,7 @@ class SignIn extends React.Component{
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                 <input
-                  className="b pa2 input-reset ba bg-transparent  hover-white w-100"
+                  className="b pa2 input-reset ba bg-transparent white hover-black w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -107,48 +115,53 @@ class SignIn extends React.Component{
                 />
               </div>
               <div className="mv3">
-                <label className="db fw6 lh-copy f6" htmlFor="password">You are: </label>
+                <label className="db  f3 pa3 fw6 lh-copy f6 white b" htmlFor="password">Please Select your Designation </label>
                 <input
                 // className='center b pa2 radio'
                   // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white"
                   type="radio"
                   name="type"
+                  value='donor'
+                  onChange={this.onRadio}
     
-                /> <label className='radio'>Donor</label><br />
+                /> <label className='radio'>Donor</label>
                 <input
                 style={{justifyContents:"left"}}
                 // className='center b pa2'
                   // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white "
                   type="radio"
                   name="type"
-                  
-                /><label className='radio'>Receiver</label><br />
+                  value='receiver'
+                  onChange={this.onRadio}
+                /><label className='radio'>Receiver</label>
                 <input
                 // className='center b pa2'
                   // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white "
                   type="radio"
                   name="type"
-                  
-                /><label className='radio'>Driver</label><br/>
+                  value='driver'
+                  onChange={this.onRadio}
+                /><label className='radio'>Driver</label>
                 <input
                 // className=" b pa2"
                   // className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white "
                   type="radio"
                   name="type"
-                
-                /><label className='radio'>Company</label><br />
+                  value='company'
+                  onChange={this.onRadio}
+                /><label className='radio'>Company</label>
               </div>
             </fieldset>
             <div className="">
               <input
                 onClick={this.authenticate}
-                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                className="b ph3 pv2 input-reset ba b--white white bg-transparent grow pointer f6 dib"
                 type="submit"
-                value="Sign in"
+                value="Sign in"black
               />
             </div>
             <div className="lh-copy mt3">
-              <p  onClick={()=>onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
+              <p  onClick={()=>onRouteChange('register')} className="f6 link dim white db pointer">Register</p>
             </div>
           </div>
         </main>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './Components/Navigation/Navigation';
 import SignIn from './Components/SignIn/Signin';
+import Register from './Components/Register/Register.js';
 
 import './App.css';
 import 'tachyons';
@@ -26,7 +27,9 @@ class App extends React.Component {
   return (
     <div className="App">
     <Navigation isSigned={this.state.isSigned} onClickChangeRoute={this.onClickChangeRoute} />
-    <SignIn />
+    {/* <SignIn />
+     */}
+     <Register />
     </div>
     
   )
