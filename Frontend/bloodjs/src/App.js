@@ -1,9 +1,10 @@
 import React from 'react';
 import Navigation from './Components/Navigation/Navigation';
 import SignIn from './Components/SignIn/Signin';
+import Driver from './Components/Driver/driver';
 
-import './App.css';
-import 'tachyons';
+// import './App.css';
+// import 'tachyons';
 class App extends React.Component {
   constructor(){
     super();
@@ -24,10 +25,11 @@ class App extends React.Component {
   }
   render(){
   return (
-    <div className="App">
-    <Navigation isSigned={this.state.isSigned} onClickChangeRoute={this.onClickChangeRoute} />
-    <SignIn />
-    </div>
+    <React.Fragment>
+    {/* <Navigation isSigned={this.state.isSigned} onClickChangeRoute={this.onClickChangeRoute} />
+    <SignIn /> */}
+    <Driver/>
+    </React.Fragment>
     
   )
   }
