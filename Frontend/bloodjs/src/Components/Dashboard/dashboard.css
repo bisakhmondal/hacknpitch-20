@@ -1,0 +1,80 @@
+.card{
+    height : auto;
+    min-height: 10em;
+    max-height: 20em;
+    width:  10em;
+    /* padding : 2em; */
+    border-radius: 10px ;
+    border : 1px solid #cbd1cc;
+    margin-top :2em;
+    margin-left: 1em;
+    flex :1;
+
+}
+
+.card .title{
+    display: flex;
+    background-color: #B83227;
+    align-items: center;
+    justify-content: center ;
+    border-radius: 10px;
+    height: 4em;
+    text-align: center;
+    color :white
+}
+
+.card .cbody{
+    margin-top: 2em;
+}
+
+.post-outer {
+    flex:1.1;
+    height:auto;
+    width :36em;
+    padding : 2em;
+    box-shadow: 1px 1px 7px #cbd1cc;
+    border: 1px solid #cbd1cc;
+    margin-left: 1.2em;
+    margin-right: 0.9em;
+    margin-top: 2em;
+    
+    /* margin-left: 16em; */
+}
+
+.post-outer .title{
+    font-family: cursive;
+    font-weight: bolder;
+    border-bottom: 2px solid blanchedalmond;
+    cursor: pointer;
+
+}
+
+
+.post-outer .postn{
+    color:black;
+    opacity: 0.4;
+    font-size: 0.9em;
+
+}
+
+.post-outer .body{
+    color : black;
+    opacity: 0.6;
+    padding : 1em;
+    padding-bottom: 2em;
+    border-bottom: 4px solid rgb(228, 206, 175);
+
+
+}
+
+.post-outer .ele{
+    display :flex;
+    width: 100%;
+    margin-top: 1em;
+    justify-content: space-evenly;
+}
+
+.content{
+    display: flex;
+    justify-content: space-around;
+}

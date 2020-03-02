@@ -1,6 +1,8 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import './Register.css'
+import axios from 'axios'
+import {withRouter,Link} from 'react-router-dom'
 
 // import logo from 
 
@@ -30,9 +32,18 @@ class Register extends React.Component{
       userPassword1:'',
       userPassword2:'',
       name:'',
-      userType:''
+      userType:'',
+      error:'',
+      isSigned:false
+
     }
   }
+  componentDidMount(){
+    if(localStorage.getItem('FBIdToken')!==null){
+      this.props.history.push('/dashboard')
+    }
+  }
+  
   onEmailChange=(event)=>{
     this.setState({userEmail:event.target.value})
   }
@@ -45,7 +56,31 @@ class Register extends React.Component{
   onPasswordChange2=(event)=>{
     this.setState({userPassword2:event.target.value})
   }
-
+  onRadio=(event)=>{
+    this.setState({userType:event.target.value})
+  }
+  SignUpUser=()=>{
+    const userData={
+      name:this.state.name,
+      email:this.state.userEmail,
+      password:this.state.userPassword1,
+      confirmPassword:this.state.userPassword2,
+      type:this.state.userType
+    }
+    localStorage.setItem('type',this.state.userType);
+    axios.post('https://us-central1-blood-fb77e.cloudfunctions.net/api/signup',userData)
+    .then(res=>{
+      this.setAuthorizationHeader(res.data.token)
+      localStorage.setItem('type',this.state.userType)
+    })
+    .then(this.props.history.push('/update/donor'))
+    .catch(err=>(this.setState({error:err.response.data})))
+  }
+  setAuthorizationHeader = (token) => {
+    const FBIdToken = `Bearer ${token}`;
+    localStorage.setItem('FBIdToken', FBIdToken);
+    axios.defaults.headers.common['Authorization'] = FBIdToken;
+  };
   // authenticate=()=>{
   //   fetch("http://localhost:3001/register",{
   //     method:'post',
@@ -67,8 +102,8 @@ class Register extends React.Component{
   //   // console.log(this.state)
 
   // }
-  render(){
-    const {onRouteChange}=this.props;
+  render() {
+    console.log(this.state)
     return(
       <div className='sign center'>
         <Particles className='particles'
@@ -153,14 +188,14 @@ class Register extends React.Component{
             </fieldset>
             <div className="">
               <input
-                onClick={this.authenticate}
+                onClick={this.SignUpUser}
                 className="b ph3 pv2 input-reset ba btn btn-primary grow pointer f6 dib"
                 type="submit"
                 value="Register"
               />
             </div>
             <div className="lh-copy mt3">
-              <p  onClick={()=>onRouteChange('register')} className="f6 link dim black center db pointer">Sign In</p>
+              <p className="f6 black center db" to='/signin'>Already have an account? <Link className='link blue pointer link dim'> Sign In</Link></p>
             </div>
           </div>
         </main>
@@ -174,6 +209,6 @@ class Register extends React.Component{
 
 
 
-export default Register;
+export default withRouter(Register);
 
 // onClick={() => onRouteChange('register')}

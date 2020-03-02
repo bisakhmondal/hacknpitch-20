@@ -1,22 +1,54 @@
 import React from 'react';
 import { withRouter,Link } from 'react-router-dom';
 
-const isAuth=()=>{
-    return false;
-}
-const Navigation = ({history}) =>(
+
+
+class Navigation extends React.Component {   
+    constructor(){
+        super();
+        this.state={
+            signed:false
+        }
+    }
+    isAuth=()=>{
+        if(localStorage.getItem('FBIdToken')){
+            this.setState({signed:true})
+            return true;
+        }
+        return false;
+    }
+    SignOut=()=>{
+        localStorage.removeItem('FBIdToken');
+        localStorage.removeItem('type');
+        this.props.history.push('/signin')
+    
+    }
+    render(){
+        
+    return (
     <div>
-        {!isAuth() &&(
+        {!localStorage.getItem('FBIdToken') &&(
             <nav  style={{display:'flex',justifyContent:'flex-end'}}>
-                <Link className="pointer f3 dim black link pa3 underline" to="/signin">Sign In </Link>
-                <Link className="pointer f3 dim black link pa3 underline" to='/register'>Register </Link>
+            <a href="file:///home/bisakh/Desktop/expert/index.html#home-section" className="pointer f5 dim black link pa2 underline">Home </a>
+            <Link className="pointer f5 dim black link pa2 underline" to="/Driver">Driver </Link>
+                <Link className="pointer f5 dim black link pa2 underline" to="/signin">Sign In </Link>
+                <Link className="pointer f5 dim black link pa2 underline" to='/register'>Register </Link>
+                
             </nav>
         )}
-        {isAuth() && (
+        {localStorage.getItem('FBIdToken') && (
             <nav  style={{display:'flex',justifyContent:'flex-end'}}>
-                <Link className="pointer f3 dim black link pa3 underline" to='/'>Sign Out </Link>
+
+            <a href="file:///home/bisakh/Desktop/expert/index.html#home-section" className="pointer f5 dim black link pa2 underline">Home </a>
+            <Link className="pointer f5 dim black link pa2 underline" to="/Driver">Driver </Link>
+            <Link className="pointer f5 dim black link pa2 underline" to='/update/donor'>Profile Update</Link>
+            <Link className="pointer f5 dim black link pa2 underline" to='/dashboard'>Dashboard </Link>
+                <Link className="pointer f5 dim black link pa2 underline" onClick={this.SignOut} >Sign Out </Link>
+                
             </nav>
         )}
     </div>
-)
+    );
+        }
+}
 export default withRouter(Navigation);

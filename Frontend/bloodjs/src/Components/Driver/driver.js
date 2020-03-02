@@ -40,9 +40,9 @@ class Driver extends React.Component{
    const setlat = lat => this.setState({ lat : lat});
    const setlon = lon => this.setState({ lng : lon});
      return (
-       <div style={{ paddingTop: "0", width: "100%", height: "100%" }}>
-         <h3 style={{ marginLeft: "2em" }}>
-           Hey , you are requested to keep your location connected , please
+       <div style={{ paddingTop: "0", width: "100%", height: "100%" }} className='tc'>
+         <h3 style={{ marginLeft: "2em" }} className="f2 white">
+           Hey , you are requested to keep your location connected.<br />  please
            click on the button below to do the same.
          </h3>
          <button
@@ -82,9 +82,9 @@ class Driver extends React.Component{
            }
            style={{
              padding: "1em",
-             marginLeft: "20em",
              backgroundColor: "white"
            }}
+           className='btn btn-secondary black hover-black grow'
            
          >
            Watch your location
@@ -96,19 +96,23 @@ class Driver extends React.Component{
            useHTTPS
            includeUI
            includePlaces
+           interactive={true}
+           
          >
            <HMap
              style={{
                height: "600px",
                width: "80%",
                margin: "1em",
-               marginLeft: "5em",
+               marginLeft: "7em",
                marginRight: "5em",
-               border: "2px solid black"
+               border: "2px solid black",
+               
              }}
+
              mapOptions={{
                center: { lat: this.state.lat, lng: this.state.lng },
-               zoom: 10
+               zoom: 6
              }}
            >
              <HMapMarker
