@@ -69,6 +69,10 @@ class Donor extends React.Component{
         }
         return true;
     }
+    componentWillMount()
+    {
+        console.log(localStorage.getItem('type'))
+    }
     render(){
         console.log(this.state)
     return(
@@ -77,7 +81,7 @@ class Donor extends React.Component{
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZV3dhZWKI_VKZ7uOq9ojQ2OWfx5eMHM51AOeliwmCQsUSVcTu" alt="rocket_contact"/>
             </div>
             <form>
-                <h3 style= {{color:'black', padding:'0.8em'}}>Dear Donor</h3> 
+                <h3 style= {{color:'black', padding:'0.8em'}}>Dear {localStorage.getItem('type')}</h3> 
                 <h3 >Please Update your Profile</h3>
                <div className="row">
                     <div className="col-md-6">

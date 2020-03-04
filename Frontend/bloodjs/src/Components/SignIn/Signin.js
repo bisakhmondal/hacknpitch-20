@@ -1,38 +1,22 @@
 import React from 'react';
 import './Signin.css'
 import Particles from 'react-particles-js';
-import {Link} from 'react-router-dom';
-
+import {Link,withRouter} from 'react-router-dom';
+import axios from 'axios';
 const particleoptions={
   "particles": {
       "number": {
-          "value": 160,
-          "density": {
-              "enable": false
-          }
+          "value": 100
       },
       "size": {
-          "value": 10,
-          "random": true
-      },
-      "move": {
-          "direction": "bottom",
-          "out_mode": "out"
-      },
-      "line_linked": {
-          "enable": false
+          "value": 3
       }
   },
   "interactivity": {
       "events": {
-          "onclick": {
+          "onhover": {
               "enable": true,
-              "mode": "remove"
-          }
-      },
-      "modes": {
-          "remove": {
-              "particles_nb": 10
+              "mode": "repulse"
           }
       }
   }
@@ -45,7 +29,12 @@ class SignIn extends React.Component{
       userEmail:'',
       userPassword:'',
       userType:'',
-      token:''
+      error:''
+    }
+  }
+  componentDidMount(){
+    if(localStorage.getItem('FBIdToken')!==null){
+      this.props.history.push('/dashboard')
     }
   }
   onEmailChange=(event)=>{
@@ -58,33 +47,28 @@ class SignIn extends React.Component{
     this.setState({userType:event.target.value})
   }
 
-  // authenticate=()=>{
-  //   fetch("http://localhost:3001/signin",{
-  //     method:'post',
-  //     headers:{'Content-Type':'application/json'},
-  //     body:JSON.stringify({
-  //       email:this.state.userEmail,
-  //       password:this.state.userPassword
-  //     })
-  //   })
-  //   .then(response=>response.json())
-  //   .then(data=>{
-  //     if(data==='success'){
-  //       this.props.onRouteChange('home');
-  //     }
-  //       else{
-  //         alert("Invalid Credential");
-  //         this.setState({userEmail:'',userPassword:''})
-  //       }
-  //   })
-    
-  //   // console.log(this.state)
 
-  // }
+  authenticate=()=>{
+    const userData={
+      email:this.state.userEmail,
+      password:this.state.userPassword
+    }
+      axios.post('https://us-central1-blood-fb77e.cloudfunctions.net/api/login',userData).then(res=>{
+        this.setAuthorizationHeader(res.data)
+        console.log("hi")
+        localStorage.setItem('type',this.state.userType)
+      this.props.history.push('/dashboard');
+      })
+      .catch(err=>this.setState({error:err.response.data}));
+  }
+  setAuthorizationHeader = (token) => {
+    const FBIdToken = `Bearer ${token}`;
+    localStorage.setItem('FBIdToken', FBIdToken);
+    axios.defaults.headers.common['Authorization'] = FBIdToken;
+  };
   render(){
-    console.log(this.state);
+
     
-    const {onRouteChange}=this.props;
     return(
       <div className='sign'>
         <Particles className='particles'
@@ -166,11 +150,12 @@ class SignIn extends React.Component{
                 className="b ph3 pv2 input-reset ba black btn btn-primary grow pointer f6 dib"
                 // type="submit"
                 value="Sign in"
-                to='/register/donor'
+                to='/dashboard'
+                onClick={this.authenticate}
               >Sign In</Link>
             </div>
             <div className="lh-copy mt3">
-              <p  onClick={()=>onRouteChange('register')} className="f6 link dim black center db pointer">Register</p>
+              <p className="f6  black center db" to='/register'>Don't have an account? <Link className="link dim pointer">Register</Link></p>
             </div>
           </div>
         </main>
@@ -184,4 +169,4 @@ class SignIn extends React.Component{
 
 
 
-export default SignIn;
+export default withRouter(SignIn);
